@@ -49,6 +49,7 @@ def get_spreadsheet(spreadsheet_id):
 
     value = {"sheet_id":[],"sheet_title":[]}
     for i in worksheet_list:
+        value["sheet_id"].append(i.id)
         value["sheet_title"].append(i.title)
 
     return {
