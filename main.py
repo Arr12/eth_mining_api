@@ -56,8 +56,8 @@ def get_spreadsheet(spreadsheet_id):
         'worksheet_list' : value
     }
 
-@app.get('/get-value/{spreadsheet_id}/{sheet_title}')
-def get_value(spreadsheet_id,sheet_title):
+@app.get('/get-value/{spreadsheet_id}/{sheet_title}/{range}')
+def get_value(spreadsheet_id,sheet_title,range):
     import gspread
     from pprint import pprint
     from gspread.models import Cell, Spreadsheet
@@ -75,9 +75,8 @@ def get_value(spreadsheet_id,sheet_title):
     client = gspread.authorize(credentials)
     spreadsheet = client.open_by_key(spreadsheet_id)
     worksheet = spreadsheet.worksheet(sheet_title)
-    worksheet.get_all_values()
     value = []
-    value.append(worksheet.get_all_values())
+    value.append(worksheet.get(range))
 
     return {
         'value' : value
