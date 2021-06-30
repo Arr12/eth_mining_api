@@ -3,7 +3,7 @@ import os
 from apiclient import discovery
 from google.oauth2 import service_account
 from oauth2client.service_account import ServiceAccountCredentials
-scopes = [ 
+scopes = [
     "https://www.googleapis.com/auth/drive",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/spreadsheets"
@@ -40,7 +40,7 @@ def get_spreadsheet(spreadsheet_id):
         "https://www.googleapis.com/auth/drive.file",
         "https://www.googleapis.com/auth/drive",
     ]
-    
+
     json_key_absolute_path = "credentials.json"
     credentials = ServiceAccountCredentials.from_json_keyfile_name(json_key_absolute_path, scope)
     client = gspread.authorize(credentials)
@@ -49,7 +49,6 @@ def get_spreadsheet(spreadsheet_id):
 
     value = {"sheet_id":[],"sheet_title":[]}
     for i in worksheet_list:
-        value["sheet_id"].append(i.id)
         value["sheet_title"].append(i.title)
 
     return {
@@ -69,7 +68,7 @@ def get_value(spreadsheet_id,sheet_title):
         "https://www.googleapis.com/auth/drive.file",
         "https://www.googleapis.com/auth/drive",
     ]
-    
+
     json_key_absolute_path = "credentials.json"
     credentials = ServiceAccountCredentials.from_json_keyfile_name(json_key_absolute_path, scope)
     client = gspread.authorize(credentials)
